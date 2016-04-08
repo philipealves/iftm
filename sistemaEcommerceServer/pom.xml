@@ -10,40 +10,50 @@
 	<name>sistemaEcommerceServer</name>
 	<url>https://github.com/philipealves/iftm</url>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.12</version>
+			<version>${junit.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>5.1.0.Final</version>
+			<version>${hibernate.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>5.1.0.Final</version>
+			<version>${hibernate.version}</version>
 		</dependency>
-
-		<!-- <dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>5.2.4.Final</version>
-		</dependency> -->
 
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.38</version>
+			<version>${mysql.version}</version>
 		</dependency>
 
 	</dependencies>
+
+	<properties>
+		<!-- hibernate -->
+		<hibernate.version>5.1.0.Final</hibernate.version>
+
+		<!-- junit -->
+		<junit.version>4.12</junit.version>
+
+		<!-- mysql -->
+		<mysql.version>5.1.38</mysql.version>
+
+		<!-- maven -->
+		<maven.compiler.target>1.7</maven.compiler.target>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.archetype.packaging>2.4</maven.archetype.packaging>
+		<maven.archetype.plugin>2.4</maven.archetype.plugin>
+		<maven.war.plugin>2.6</maven.war.plugin>
+	</properties>
+
 </project>
