@@ -37,17 +37,17 @@ public class Cliente implements Serializable {
 	@Column(name = "CD_CLIENTE")
 	private Integer codigo;
 
-	@Column(name = "NM_CLIENTE", length = 255, nullable = false)
+	@Column(name = "NM_CLIENTE", length = 70, nullable = false)
 	private String nome;
 
-	@Column(name = "EMAIL_CLIENTE", length = 255, nullable = false)
+	@Column(name = "EMAIL_CLIENTE", length = 70, nullable = false)
 	private String email;
 
 	public Cliente() {
 		super();
 	}
 
-	public void validar() throws ValidacaoCampoException {
+	public boolean validar() throws ValidacaoCampoException {
 		if (nome == null || nome.equals("")) {
 			throw new ValidacaoCampoException("Campo nome deve ser preenchido");
 		}
@@ -55,6 +55,8 @@ public class Cliente implements Serializable {
 		if (email == null || email.equals("")) {
 			throw new ValidacaoCampoException("Campo e-mail deve ser preenchido");
 		}
+
+		return true;
 
 	}
 
@@ -86,6 +88,11 @@ public class Cliente implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	@Override
+	public String toString() {
+		return nome;
 	}
 
 	@Override

@@ -40,6 +40,19 @@ public class Pedido implements Serializable {
 		super();
 	}
 
+	public Pedido(Cliente cliente, Date dataHora) {
+		super();
+		this.cliente = cliente;
+		this.dataHora = dataHora;
+	}
+
+	public Pedido(Integer numero, Cliente cliente, Date dataHora) {
+		super();
+		this.numero = numero;
+		this.cliente = cliente;
+		this.dataHora = dataHora;
+	}
+
 	public Integer getNumero() {
 		return numero;
 	}

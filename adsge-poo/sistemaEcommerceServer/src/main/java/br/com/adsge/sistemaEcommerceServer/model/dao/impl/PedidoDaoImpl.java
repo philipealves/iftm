@@ -6,7 +6,6 @@
 package br.com.adsge.sistemaEcommerceServer.model.dao.impl;
 
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -24,48 +23,46 @@ import br.com.adsge.sistemaEcommerceServer.util.Conexao;
  * @since 22/03/2016
  *
  */
-public class PedidoDaoImpl extends UnicastRemoteObject implements PedidoDao {
+public class PedidoDaoImpl implements PedidoDao {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 6416035164359776792L;
+	private EntityManager entityManager;
 
 	public PedidoDaoImpl() throws RemoteException {
+		entityManager = Conexao.getEntityManager();
 	}
 
 	@Override
-	public void salvar(Pedido cliente) {
-		EntityManager em = Conexao.getEntityManager();
-		em.getTransaction().begin();
+	public Pedido salvar(Pedido pedido) {
+		entityManager.getTransaction().begin();
 
-		if (cliente.getNumero() != null) {
-			cliente = em.merge(cliente);
+		if (pedido.getNumero() != null) {
+			pedido = entityManager.merge(pedido);
 		}
 
-		em.persist(cliente);
+		entityManager.persist(pedido);
 
-		em.getTransaction().commit();
-		em.close();
+		entityManager.getTransaction().commit();
+		entityManager.close();
+
+		return pedido;
 	}
 
 	@Override
-	public void excluir(Pedido cliente) throws RemoteException {
-		EntityManager em = Conexao.getEntityManager();
-		em.getTransaction().begin();
+	public Pedido excluir(Pedido pedido) {
+		entityManager.getTransaction().begin();
 
-		cliente = em.merge(cliente);
-		em.remove(cliente);
+		pedido = entityManager.merge(pedido);
+		entityManager.remove(pedido);
 
-		em.getTransaction().commit();
-		em.close();
+		entityManager.getTransaction().commit();
+		entityManager.close();
+
+		return pedido;
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Pedido> pesquisar(Pedido pedido) {
-		EntityManager em = Conexao.getEntityManager();
-
 		StringBuilder sql = new StringBuilder("from Pedido p where 1 = 1 ");
 
 		if (pedido.getNumero() != null) {
@@ -76,7 +73,7 @@ public class PedidoDaoImpl extends UnicastRemoteObject implements PedidoDao {
 			sql.append("and p.cliente.codigo = :codigoCliente");
 		}
 
-		Query query = em.createQuery(sql.toString());
+		Query query = entityManager.createQuery(sql.toString());
 
 		if (pedido.getNumero() != null) {
 			query.setParameter("numero", pedido.getNumero());
@@ -91,7 +88,7 @@ public class PedidoDaoImpl extends UnicastRemoteObject implements PedidoDao {
 	}
 
 	@Override
-	public List<Cliente> buscarClientes() throws RemoteException {
+	public List<Cliente> buscarClientes() {
 		ClienteDao clienteDao = new ClienteDaoImpl();
 		return clienteDao.pesquisar(new Cliente());
 	}

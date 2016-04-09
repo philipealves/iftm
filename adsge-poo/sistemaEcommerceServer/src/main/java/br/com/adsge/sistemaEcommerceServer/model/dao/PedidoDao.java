@@ -1,7 +1,6 @@
 package br.com.adsge.sistemaEcommerceServer.model.dao;
 
 import java.rmi.Remote;
-import java.rmi.RemoteException;
 import java.util.List;
 
 import br.com.adsge.sistemaEcommerceServer.model.domain.Cliente;
@@ -15,15 +14,12 @@ import br.com.adsge.sistemaEcommerceServer.model.domain.Pedido;
  */
 public interface PedidoDao extends Remote {
 
-	static final String NOME_SERVICO = "ServicoPedido";
-	static final String URL_SERVICO = "rmi://127.0.0.1/" + NOME_SERVICO;
+	Pedido excluir(Pedido pedido);
 
-	void excluir(Pedido pedido) throws RemoteException;
+	List<Pedido> pesquisar(Pedido pedido);
 
-	List<Pedido> pesquisar(Pedido pedido) throws RemoteException;
+	Pedido salvar(Pedido pedido);
 
-	void salvar(Pedido pedido) throws RemoteException;
-
-	List<Cliente> buscarClientes() throws RemoteException;
+	List<Cliente> buscarClientes();
 
 }
