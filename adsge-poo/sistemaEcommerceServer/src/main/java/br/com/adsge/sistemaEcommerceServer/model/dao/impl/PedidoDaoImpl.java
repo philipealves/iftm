@@ -11,9 +11,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import br.com.adsge.sistemaEcommerceServer.model.dao.ClienteDao;
 import br.com.adsge.sistemaEcommerceServer.model.dao.PedidoDao;
-import br.com.adsge.sistemaEcommerceServer.model.domain.Cliente;
 import br.com.adsge.sistemaEcommerceServer.model.domain.Pedido;
 import br.com.adsge.sistemaEcommerceServer.util.Conexao;
 
@@ -29,7 +27,7 @@ public class PedidoDaoImpl implements PedidoDao {
 
 	public PedidoDaoImpl() throws RemoteException {
 		entityManager = Conexao.getEntityManager();
-	}
+	}	
 
 	@Override
 	public Pedido salvar(Pedido pedido) {
@@ -42,7 +40,6 @@ public class PedidoDaoImpl implements PedidoDao {
 		entityManager.persist(pedido);
 
 		entityManager.getTransaction().commit();
-		entityManager.close();
 
 		return pedido;
 	}
@@ -55,7 +52,6 @@ public class PedidoDaoImpl implements PedidoDao {
 		entityManager.remove(pedido);
 
 		entityManager.getTransaction().commit();
-		entityManager.close();
 
 		return pedido;
 	}
@@ -87,9 +83,14 @@ public class PedidoDaoImpl implements PedidoDao {
 
 	}
 
-	@Override
+	/*@Override
 	public List<Cliente> buscarClientes() {
-		ClienteDao clienteDao = new ClienteDaoImpl();
+		ClienteDao clienteDao = null;
+		try {
+			clienteDao = new ClienteDaoImpl();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		return clienteDao.pesquisar(new Cliente());
-	}
+	}*/
 }

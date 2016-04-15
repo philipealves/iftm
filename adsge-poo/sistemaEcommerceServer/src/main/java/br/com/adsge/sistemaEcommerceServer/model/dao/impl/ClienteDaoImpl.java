@@ -5,6 +5,7 @@
  */
 package br.com.adsge.sistemaEcommerceServer.model.dao.impl;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -22,9 +23,15 @@ import br.com.adsge.sistemaEcommerceServer.util.Conexao;
  */
 public class ClienteDaoImpl implements ClienteDao {
 
+	private EntityManager entityManager;
+
+	public ClienteDaoImpl() throws RemoteException {
+		entityManager = Conexao.getEntityManager();
+	}
+
 	@Override
 	public Cliente salvar(Cliente cliente) {
-		EntityManager entityManager = Conexao.getEntityManager();
+		entityManager = Conexao.getEntityManager();
 		entityManager.getTransaction().begin();
 
 		if (cliente.getCodigo() != null) {
@@ -34,21 +41,19 @@ public class ClienteDaoImpl implements ClienteDao {
 		entityManager.persist(cliente);
 
 		entityManager.getTransaction().commit();
-		entityManager.close();
 
 		return cliente;
 	}
 
 	@Override
 	public Cliente excluir(Cliente cliente) {
-		EntityManager entityManager = Conexao.getEntityManager();
+		entityManager = Conexao.getEntityManager();
 		entityManager.getTransaction().begin();
 
 		cliente = entityManager.merge(cliente);
 		entityManager.remove(cliente);
 
 		entityManager.getTransaction().commit();
-		entityManager.close();
 
 		return cliente;
 	}

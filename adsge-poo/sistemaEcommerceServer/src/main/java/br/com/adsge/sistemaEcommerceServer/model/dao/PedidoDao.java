@@ -3,7 +3,6 @@ package br.com.adsge.sistemaEcommerceServer.model.dao;
 import java.rmi.Remote;
 import java.util.List;
 
-import br.com.adsge.sistemaEcommerceServer.model.domain.Cliente;
 import br.com.adsge.sistemaEcommerceServer.model.domain.Pedido;
 
 /**
@@ -20,6 +19,6 @@ public interface PedidoDao extends Remote {
 
 	Pedido salvar(Pedido pedido);
 
-	List<Cliente> buscarClientes();
+	// List<Cliente> buscarClientes();
 
 }
