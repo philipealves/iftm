@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import br.com.adsge.sistemaEcommerceServer.util.exception.ValidacaoCampoException;
+
 @Entity
 @Table(name = "TB_PEDIDO")
 public class Pedido implements Serializable {
@@ -52,6 +54,12 @@ public class Pedido implements Serializable {
 		this.cliente = cliente;
 		this.dataHora = dataHora;
 	}
+	
+	public void validar() throws ValidacaoCampoException {
+        if (cliente == null) {
+            throw new ValidacaoCampoException("Selecione um cliente");
+        }
+    }
 
 	public Integer getNumero() {
 		return numero;
