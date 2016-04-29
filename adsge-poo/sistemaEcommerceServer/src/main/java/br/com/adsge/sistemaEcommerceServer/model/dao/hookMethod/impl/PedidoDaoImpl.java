@@ -6,6 +6,12 @@ import java.util.Map;
 import br.com.adsge.sistemaEcommerceServer.model.dao.hookMethod.PedidoDao;
 import br.com.adsge.sistemaEcommerceServer.model.domain.Pedido;
 
+/**
+ *
+ * @author Philipe Alves de Oliveira e Silva
+ * @since 15/04/2016
+ *
+ */
 public class PedidoDaoImpl extends CrudDaoImpl<Pedido, Integer> implements PedidoDao {
 
 	@Override

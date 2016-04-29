@@ -9,6 +9,12 @@ import javax.persistence.Query;
 import br.com.adsge.sistemaEcommerceServer.model.dao.hookMethod.CrudDao;
 import br.com.adsge.sistemaEcommerceServer.util.Conexao;
 
+/**
+ *
+ * @author Philipe Alves de Oliveira e Silva
+ * @since 15/04/2016
+ *
+ */
 public abstract class CrudDaoImpl<T, PK> implements CrudDao<T, PK> {
 
 	private EntityManager entityManager;
